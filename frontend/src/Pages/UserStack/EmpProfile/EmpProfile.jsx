@@ -6,6 +6,7 @@ import Toaster from '../../../Utils/Constants/Toaster';
 import EmpYup from '../../../Validation/Emp/EmpYup';
 import { useNavigate } from 'react-router-dom';
 import Authenticate from '../../../Store/Authenticate';
+import pro from '../../../../public/assets/images/profile/probanner.jpg'
 
 export default function EmpProfile() {
     const [loading, setLoading] = useState(false);
@@ -76,13 +77,13 @@ export default function EmpProfile() {
                 <div className="row">
                     <div className="col-12 d-flex align-items-stretch">
                         <div className="card w-100 shadow-sm">
-                            <div className='card-header bg-info-subtle'>
-                                <h2>Edit User</h2>
+                            <div className='card-header bg-dark '>
+                                <h2 className='text-white fw-bolder'>Edit User</h2>
                             </div>
                             <div className="card-body p-4">
                                 <div className="row">
                                     <div className="col-5">
-                                        <img className='img-fluid' src={'https://img.freepik.com/premium-vector/cloud-security-isolated-cartoon-vector-illustrations-cybersecurity-datacenter-worker-deals-with_107173-64947.jpg?w=900'} alt="" />
+                                        <img className='img-fluid rounded' src={pro} alt="" />
                                     </div>
                                     <div className="col-6">
                                         {
@@ -95,7 +96,7 @@ export default function EmpProfile() {
                                             ) : (
                                                 <form className='needs-validation' noValidate onSubmit={handleSubmit}>
 
-                                                    <h4 className='bg-primary-subtle p-2 rounded'>User Detail</h4>
+                                                    <h4 className='bg-dark text-white p-2 rounded'>User Detail</h4>
                                                     <div className="row mb-2">
                                                         <div className="col-6 col-md-8">
                                                             <label htmlFor="name" className="form-label">Name</label>

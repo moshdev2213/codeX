@@ -69,7 +69,7 @@ export default function Sidebar() {
                             <span className="hide-menu">AUTH</span>
                         </li>
                         <li className="sidebar-item">
-                            <NavLink to={'/main/user/empEdit'} className="sidebar-link" aria-expanded="false">
+                            <NavLink to={'/main/user/profile'} className="sidebar-link" aria-expanded="false">
                                 <span>
                                     <i className="ti ti-user" />
                                 </span>
