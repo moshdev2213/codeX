@@ -3,48 +3,49 @@ import BaseService from "../Base/BaseService.js";
 
 class LinguaService {
     constructor() {
-        BaseService.getBaseURL()
-        this.URL = ""
-    }
-    getBugReport(input) {
-        let data = {
-            "prompt": `${input} fing bug and give explanation for 100 words`,
+        this.URL = BaseService.getBaseURL();
+        this.defaultParams = {
             "target": "en",
-            "model": "linguaGPT-2",
-            "uid": "gM87F3Umb6WNAhp7Nj17V319B0C3",
-            "key": "e6c364519a0271ee58eb53480c53a9447a68bc1513e35d4f9e867fb27d92c224"
-        }
-        return axios.post(this.URL, data,BaseService.getHeader())
+            "model": process.env.Lingua_Model,
+            "uid": process.env.Lingua_UID,
+            "key": process.env.Lingua_Token
+        };
     }
-    getBugReference(input) {
-        let data = {
-            "prompt": `${input} give me about 5 different reference links for resolving the bug in the code`,
-            "target": "en",
-            "model": "linguaGPT-2",
-            "uid": "gM87F3Umb6WNAhp7Nj17V319B0C3",
-            "key": "e6c364519a0271ee58eb53480c53a9447a68bc1513e35d4f9e867fb27d92c224"
+
+    async postRequest(prompt, target) {
+        const data = {
+            ...this.defaultParams,
+            "prompt": prompt,
+            "target": target
+        };
+        try {
+            const response = await axios.post(this.URL, data, BaseService.getHeader());
+            return response;
+        } catch (error) {
+            console.error("Error:", error);
+            throw error;
         }
-        return axios.post(this.URL, data)
     }
-    getBugInSinhala(input) {
-        let data = {
-            "prompt": `${input} fing bug and give explanation for 100 words`,
-            "target": "si",
-            "model": "linguaGPT-2",
-            "uid": "gM87F3Umb6WNAhp7Nj17V319B0C3",
-            "key": "e6c364519a0271ee58eb53480c53a9447a68bc1513e35d4f9e867fb27d92c224"
-        }
-        return axios.post(this.URL, data)
+
+    async getBugReport(input) {
+        const prompt = `${input} find error and give explanation for 100 words`;
+        return await this.postRequest(prompt, "en");
     }
-    getBugInTamil(input) {
-        let data = {
-            "prompt": `${input} find bug and give explanation for 100 words`,
-            "target": "ta",
-            "model": "linguaGPT-2",
-            "uid": "gM87F3Umb6WNAhp7Nj17V319B0C3",
-            "key": "e6c364519a0271ee58eb53480c53a9447a68bc1513e35d4f9e867fb27d92c224"
-        }
-        return axios.post(this.URL, data)
+
+    async getBugReference(input) {
+        const prompt = `${input} give me about 5 different reference links for resolving the error in the code`;
+        return await this.postRequest(prompt, "en");
+    }
+
+    async getBugInSinhala(input) {
+        const prompt = `${input} find error and give explanation for 100 words`;
+        return await this.postRequest(prompt, "si");
+    }
+
+    async getBugInTamil(input) {
+        const prompt = `${input} find error and give explanation for 100 words`;
+        return await this.postRequest(prompt, "ta");
     }
 }
 export default LinguaService = new LinguaService();
+

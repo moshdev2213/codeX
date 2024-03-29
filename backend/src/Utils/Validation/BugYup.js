@@ -42,6 +42,14 @@ class BugYup {
         email: yup.string().email().required(),
         id:yup.string().required()
     })
+    addBugToStarred=yup.object({
+        email: yup.string().email().required(),
+        id:yup.string().required()
+    })
+    addBugToFavourite=yup.object({
+        email: yup.string().email().required(),
+        id:yup.string().required()
+    })
 
 }
 

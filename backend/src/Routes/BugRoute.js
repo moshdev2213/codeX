@@ -17,5 +17,7 @@ router.post('/getAllFavouriteBugs',  validateSchema(BugYup.getAllFavouriteBugs),
 router.post('/getAllStarredBugs',  validateSchema(BugYup.getAllStarredBugs), BugController.getAllStarredBugs);
 router.post('/removeBugFavourite',  validateSchema(BugYup.removeBugFavourite), BugController.removeBugFavourite);
 router.post('/removeBugStarred',  validateSchema(BugYup.removeBugStarred), BugController.removeBugStarred);
+router.post('/addBugToStarred',  validateSchema(BugYup.addBugToStarred), BugController.addBugToStarred);
+router.post('/addBugToFavourite',  validateSchema(BugYup.addBugToFavourite), BugController.addBugToFavourite);
 
 export default router;

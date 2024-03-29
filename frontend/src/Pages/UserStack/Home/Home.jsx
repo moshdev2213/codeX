@@ -13,12 +13,16 @@ export default function Home() {
   const [bugReport, setBugReport] = useState(null)
   const [bugNative, setBugNative] = useState(null)
   const [bugReference, setBugReference] = useState(null)
+  const [bugFavorites, setBugFavorites] = useState(false)
+  const [bugStarred, setBugStarred] = useState(false)
 
   const handleFixErrorSubmit = async (editorContent) => {
     setLoading(true);
     setBugReport(null)
     setBugNative(null)
     setBugReference(null)
+    setBugStarred(false)
+    setBugFavorites(false)
     Toaster.loadingToast('Analyzing Bug...');
     try {
       const result = await BugSevice.getBugReport(userEmail, editorContent);
@@ -35,7 +39,7 @@ export default function Home() {
       Toaster.dismissLoadingToast();
     }
   };
-  const getNativeLanguage = async (id)=>{
+  const getNativeLanguage = async (id) => {
     setLoading(true);
     Toaster.loadingToast('Analyzing Bug...');
     try {
@@ -71,6 +75,44 @@ export default function Home() {
       Toaster.dismissLoadingToast();
     }
   }
+  const addBugToFavourite = async (id) => {
+    setLoading(true);
+    Toaster.loadingToast('Adding To Favourite...');
+    try {
+      const result = await BugSevice.addBugToFavourite(userEmail, id);
+      if (result.data.code === 200) {
+        // setBugFavorites(result.data.data.bug[0].favourite)
+        setBugFavorites(true)
+        Toaster.justToast('success', 'bug added to favorites', () => {
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      alert(error)
+    } finally {
+      setLoading(false);
+      Toaster.dismissLoadingToast();
+    }
+  }
+  const addBugToStarred = async (id) => {
+    setLoading(true);
+    Toaster.loadingToast('Adding To Starred...');
+    try {
+      const result = await BugSevice.addBugToStarred(userEmail, id);
+      if (result.data.code === 200) {
+        // setBugStarred(result.data.data.bug[0].starred)
+        setBugStarred(true)
+        Toaster.justToast('success', 'bug added to Starred', () => {
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      alert(error)
+    } finally {
+      setLoading(false);
+      Toaster.dismissLoadingToast();
+    }
+  }
   return (
     <div className="body-wrapper  py-3 " style={{ marginLeft: '230px', height: '100%' }}>
       <div className="container h-100" style={{ maxWidth: 'none' }}>
@@ -86,10 +128,13 @@ export default function Home() {
                 bugReference={bugReference}
                 getNativeLanguage={getNativeLanguage}
                 generateBugReference={generateBugReference}
+                addBugToFavourite={addBugToFavourite}
+                addBugToStarred={addBugToStarred}
+                bugStarred={bugStarred}
+                bugFavorites={bugFavorites}
               />
             ) : (
-                /* loading ? (<PreLoader/>) : (<GettingStarted />) */ 
-                <GettingStarted/>
+              loading ? (<PreLoader />) : (<GettingStarted />)
             )
           }
 

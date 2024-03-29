@@ -1,6 +1,17 @@
 import React from 'react'
 
-export default function XBuger({ loading, bugReport, bugNative, getNativeLanguage, bugReference, generateBugReference }) {
+export default function XBuger({
+    loading,
+    bugReport,
+    bugNative,
+    getNativeLanguage,
+    bugReference,
+    generateBugReference,
+    addBugToFavourite,
+    addBugToStarred,
+    bugStarred,
+    bugFavorites
+}) {
     return (
         <>
             <div className="overflow-scroll overflow-x-hidden" style={{ flex: 1 }}>
@@ -13,12 +24,16 @@ export default function XBuger({ loading, bugReport, bugNative, getNativeLanguag
                                 <p className='text-black fs-5 fw-bolder mb-2'>Bug Record</p>
                                 <div className="p-3 rounded" style={{ backgroundColor: '#f3f3f3' }}>
                                     <div dangerouslySetInnerHTML={{ __html: bugReport.html }} />
-                                    <div className="d-flex justify-content-center align-items-center">
+                                    <div className="d-flex justify-content-end align-items-center">
                                         <button disabled={loading} onClick={() => {
                                             getNativeLanguage(bugReport.id)
                                         }} className='btn btn-dark mx-3'>Native</button>
-                                        <button disabled={loading} className='btn btn-dark mx-3'>Favourites</button>
-                                        <button disabled={loading} className='btn btn-dark'>Starred</button>
+                                        <button onClick={() => {
+                                            addBugToStarred(bugReport.id)
+                                        }} disabled={loading || bugStarred} className='btn btn-dark'>Starred</button>
+                                        <button onClick={() => {
+                                            addBugToFavourite(bugReport.id)
+                                        }} disabled={loading || bugFavorites} className='btn btn-dark ms-3'>Favourites</button>
                                         <button onClick={() => {
                                             generateBugReference(bugReport.id)
                                         }} disabled={loading} className='btn btn-dark mx-3'>References</button>

@@ -14,7 +14,7 @@ export default function GettingStarted() {
                                 <li className='list-group-item'>1. Simply type or paste your code.</li>
                                 <li className='list-group-item'>2. Choose the desired programming language you are using.</li>
                                 <li className='list-group-item'>3. Our advanced code editor shows syntactical errors for the code you are entering.</li>
-                                <li className='list-group-item'>4. Need more support? Click on the <button class="btn btn-danger btn-sm">fix bug</button>.</li>
+                                <li className='list-group-item'>4. Need more support? Click on the <button class="btn btn-danger btn-sm">Analyze Error</button>.</li>
                                 <li className='list-group-item'>5. And we've got you covered with your bug.</li>
                                 <li className='list-group-item'>6. You could simply generate the bug issue in your native language for further clarifications.</li>
                                 <li className='list-group-item'>7. We do include references which would help understand the bug more precisely.</li>

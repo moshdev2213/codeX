@@ -169,7 +169,7 @@ class BugController {
                 { $set: { favourite: false } }
             );
             if (result.modifiedCount === 0) return response(res, 403, { message: 'Error db record updation' });
-            return response(res, 200, { message: "removed from favourite" })
+            return response(res, 200, { message: "removed from favourite",bug })
         } catch (error) {
             console.log(error);
             return response(res, 500, error);
@@ -187,7 +187,43 @@ class BugController {
                 { $set: { starred: false } }
             );
             if (result.modifiedCount === 0) return response(res, 403, { message: 'Error db record updation' });
-            return response(res, 200, { message: "removed from starred" })
+            return response(res, 200, { message: "removed from starred",bug })
+        } catch (error) {
+            console.log(error);
+            return response(res, 500, error);
+        }
+    }
+    // add bug to favourite favourite
+    addBugToFavourite = async (req, res) => {
+        const { email, id } = req.body;
+        try {
+            const bug = await Bug.find({ _id: id, email })
+            if (!bug) return response(res, 404, { message: 'no bugs found' })
+
+            const result = await Bug.updateOne(
+                { _id: id },
+                { $set: { favourite: true } }
+            );
+            if (result.modifiedCount === 0) return response(res, 403, { message: 'Error db record updation' });
+            return response(res, 200, { message: "added to favourite",bug })
+        } catch (error) {
+            console.log(error);
+            return response(res, 500, error);
+        }
+    }
+    // add bug to starred
+    addBugToStarred = async (req, res) => {
+        const { email, id } = req.body;
+        try {
+            const bug = await Bug.find({ _id: id, email })
+            if (!bug) return response(res, 404, { message: 'no bugs found' })
+
+            const result = await Bug.updateOne(
+                { _id: id },
+                { $set: { starred: true } }
+            );
+            if (result.modifiedCount === 0) return response(res, 403, { message: 'Error db record updation' });
+            return response(res, 200, { message: "added to starred",bug })
         } catch (error) {
             console.log(error);
             return response(res, 500, error);

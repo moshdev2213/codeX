@@ -46,7 +46,7 @@ export default function XEditor({handleFixErrorSubmit,loading}) {
                             </select>
                             <button disabled={loading} onClick={() => {
                                 handleFixErrorSubmit(editorContent)
-                            }} className='btn btn-danger w-100 ms-3'>Fix Error</button>
+                            }} className='btn btn-danger w-100 ms-3'>Analyze Error</button>
                         </div>
                     </div>
                 </div>
