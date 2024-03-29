@@ -2,21 +2,16 @@ import { Editor } from '@monaco-editor/react'
 import React, { useState } from 'react'
 import { topLanguages } from '../../../../Utils/Constants/Languages/Languages';
 
-export default function XEditor() {
+export default function XEditor({handleFixErrorSubmit,loading}) {
     const [language, setLanguage] = useState('javascript'); // Initially set to 'plaintext'
     const [editorContent, setEditorContent] = useState('// Enter your code here')
     const handleLanguageChange = (e) => {
         setLanguage(e.target.value);
     };
     const handleEditorChange = (value, event) => {
-        // Update the editor content state with the new value
         setEditorContent(value);
     };
-    const handleSendToBackend = () => {
-        // Send the editor content to the backend
-        console.log('Sending content to backend:', editorContent);
-        // You can perform your API request to send the content to the backend here
-    };
+    
     return (
         <div className="me-4" style={{ flex: 1 }}>
             <div className="card h-100 p-3 w-100 shadow-sm">
@@ -44,13 +39,13 @@ export default function XEditor() {
                         </div>
                         {/* row 2 */}
                         <div className='d-flex justify-content-between align-items-center'>
-                            <select className='form-select' onChange={handleLanguageChange} value={language}>
+                            <select disabled={loading} className='form-select' onChange={handleLanguageChange} value={language}>
                                 {topLanguages.map(lang => (
                                     <option key={lang} value={lang}>{lang}</option>
                                 ))}
                             </select>
-                            <button onClick={() => {
-                                // alert(editorContent)
+                            <button disabled={loading} onClick={() => {
+                                handleFixErrorSubmit(editorContent)
                             }} className='btn btn-danger w-100 ms-3'>Fix Error</button>
                         </div>
                     </div>

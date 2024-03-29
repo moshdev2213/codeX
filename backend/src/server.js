@@ -15,12 +15,15 @@ app.use(Express.json());
 // import routes
 import AuthRoute from './Routes/AuthRoute.js'
 import EmpRoute from './Routes/EmpRoute.js'
+import BugRoute from './Routes/BugRoute.js'
+
 // routes definition starts here
 app.get("/", (req, res) => {
     return response(res,200,"Server Online")
 })
 app.use('/api/v1/auth', AuthRoute)
 app.use('/api/v1/employee',EmpRoute)
+app.use('/api/v1/bug',BugRoute)
 
 //db connction
 db();
