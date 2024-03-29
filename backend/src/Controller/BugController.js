@@ -127,7 +127,7 @@ class BugController {
         try {
             const bugs = await Bug.find({ email })
             if (!bugs) return response(res, 404, { message: 'no bugs found' })
-            return response(res, 200, bugs)
+            return response(res, 200, {bugs,count:bugs.length})
         } catch (error) {
             console.log(error);
             return response(res, 500, error);
@@ -139,7 +139,7 @@ class BugController {
         try {
             const bugs = await Bug.find({ email, favourite: true })
             if (!bugs) return response(res, 404, { message: 'no bugs found' })
-            return response(res, 200, bugs)
+            return response(res, 200, {bugs,count:bugs.length})
         } catch (error) {
             console.log(error);
             return response(res, 500, error);
@@ -151,7 +151,7 @@ class BugController {
         try {
             const bugs = await Bug.find({ email, starred: true })
             if (!bugs) return response(res, 404, { message: 'no bugs found' })
-            return response(res, 200, bugs)
+            return response(res, 200, {bugs,count:bugs.length})
         } catch (error) {
             console.log(error);
             return response(res, 500, error);
