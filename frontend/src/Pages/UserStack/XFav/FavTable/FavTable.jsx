@@ -1,7 +1,7 @@
 import React from 'react'
 import DateFormatter from '../../../../Utils/Constants/DateFormatter'
 
-export default function FavTable({ bugs, viewBug }) {
+export default function FavTable({ bugs, viewBug, removeBugFavourite }) {
     return (
         <div className="overflow-scroll overflow-x-hidden me-2" style={{ flex: 1 }}>
             <div className=" h-100 w-100 shadow-sm">
@@ -42,7 +42,10 @@ export default function FavTable({ bugs, viewBug }) {
                                                                     <div dangerouslySetInnerHTML={{ __html: bug.bug_res_html}}></div>
                                                                 </td> */}
                                                                 <td>{DateFormatter.formatDate(bug.created_at)}</td>
-                                                                <td className=''>
+                                                                <td className='d-flex justify-content-between align-items-center'>
+                                                                    <button onClick={() => {
+                                                                        removeBugFavourite(bug._id)
+                                                                    }} className='btn btn-danger rounded text-white p-2'>Remove</button>
                                                                     <button onClick={() => {
                                                                         viewBug(bug._id)
                                                                     }} className='btn btn-dark rounded text-white p-2'>More</button>

@@ -229,5 +229,16 @@ class BugController {
             return response(res, 500, error);
         }
     }
+    removeBug = async (req, res) => {
+        const { email, id } = req.body;
+        try {
+            const result = await Bug.findOneAndDelete({ _id: id, email });
+            if (!result) return response(res, 403, { message: 'Error db delete process' });
+            return response(res, 200, { message: "deleted sucessully" })
+        } catch (error) {
+            console.log(error);
+            return response(res, 500, error);
+        }
+    }
 }
 export default BugController = new BugController()

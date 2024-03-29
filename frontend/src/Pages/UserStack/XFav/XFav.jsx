@@ -4,6 +4,8 @@ import FavRecord from './FavRecord/FavRecord'
 import LocalStore from '../../../Store/LocalStore'
 import BugSevice from '../../../Services/Bug/BugSevice'
 import PreLoader from '../../../Components/PreLoader/PreLoader'
+import CusSwal from '../../../Utils/CustomSwal/CusSwal'
+import Toaster from '../../../Utils/Constants/Toaster'
 
 export default function XFav() {
     const userEmail = LocalStore.getToken().email
@@ -33,7 +35,27 @@ export default function XFav() {
         }
         // setLoading(false)
     }
+    const removeBugFavourite = (id) => {
+        CusSwal.deleteConfiramation(async () => {
+            setLoading(true);
+            Toaster.loadingToast('Removing from favourites Bug .........')
+            try {
+                const result = await BugSevice.removeBugFavourite(userEmail, id);
+                if (result.data.code === 200) {
+                    fetchAllBugs()
+                    Toaster.justToast('success', 'removed succesffully', () => {
+                    })
+                }
+            } catch (error) {
+                console.error(error);
+                alert(error)
+            } finally {
+                setLoading(false);
+                Toaster.dismissLoadingToast()
+            }
+        })
 
+    }
     useEffect(() => {
         fetchAllBugs()
     }, [])
@@ -46,7 +68,7 @@ export default function XFav() {
                             <PreLoader />
                         ) : (
                             <>
-                                <FavTable bugs={bugs} viewBug={viewBug} />
+                                    <FavTable bugs={bugs} viewBug={viewBug} removeBugFavourite={removeBugFavourite} />
                                 <FavRecord bug={bug} />
                             </>
                         )

@@ -16,6 +16,7 @@ class BugService {
         this.REMOVE_BUG_STARRED = "bug/removeBugStarred";
         this.ADD_BUG_STARRED = "bug/addBugToStarred";
         this.ADD_BUG_FAVOURITE = "bug/addBugToFavourite";
+        this.DLT_BUG = "bug/removeBug";
     }
 
     getBugReport(email, prompt) {
@@ -98,6 +99,13 @@ class BugService {
             id
         };
         return axios.post(this.ADD_BUG_FAVOURITE, data, BaseService.getHeader());
+    }
+    removeBug(email,id) {
+        let data = {
+            email,
+            id
+        };
+        return axios.post(this.DLT_BUG, data, BaseService.getHeader());
     }
 }
 

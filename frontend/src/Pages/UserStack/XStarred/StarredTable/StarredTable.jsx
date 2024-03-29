@@ -1,7 +1,7 @@
 import React from 'react'
 import DateFormatter from '../../../../Utils/Constants/DateFormatter'
 
-export default function StarredTable({ bugs, viewBug }) {
+export default function StarredTable({ bugs, viewBug, removeBugStarred }) {
     return (
         <div className="overflow-scroll overflow-x-hidden me-2" style={{ flex: 1 }}>
             <div className=" h-100 w-100 shadow-sm">
@@ -11,7 +11,7 @@ export default function StarredTable({ bugs, viewBug }) {
                             {/* header */}
                             <div class="d-flex flex-row justify-content-between align-items-center" role="search">
                                 <div className="div">
-                                    <h4 className='h1 fw-bolder'>Favorite Bugs</h4>
+                                    <h4 className='h1 fw-bolder'>Starred Bugs</h4>
                                     <p>showing the total bugs that user has favoured</p>
                                 </div>
                                 <div className="div">
@@ -42,7 +42,10 @@ export default function StarredTable({ bugs, viewBug }) {
                                                                     <div dangerouslySetInnerHTML={{ __html: bug.bug_res_html}}></div>
                                                                 </td> */}
                                                                 <td>{DateFormatter.formatDate(bug.created_at)}</td>
-                                                                <td className=''>
+                                                                <td className='d-flex justify-content-between align-items-center'>
+                                                                    <button onClick={() => {
+                                                                        removeBugStarred(bug._id)
+                                                                    }} className='btn btn-danger rounded text-white p-2'>Remove</button>
                                                                     <button onClick={() => {
                                                                         viewBug(bug._id)
                                                                     }} className='btn btn-dark rounded text-white p-2'>More</button>

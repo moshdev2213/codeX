@@ -4,6 +4,8 @@ import StarredRecord from './StarredRecord/StarredRecord'
 import LocalStore from '../../../Store/LocalStore'
 import PreLoader from '../../../Components/PreLoader/PreLoader'
 import BugSevice from '../../../Services/Bug/BugSevice'
+import CusSwal from '../../../Utils/CustomSwal/CusSwal'
+import Toaster from '../../../Utils/Constants/Toaster'
 
 export default function XStarred() {
     const userEmail = LocalStore.getToken().email
@@ -33,7 +35,26 @@ export default function XStarred() {
         }
         // setLoading(false)
     }
-
+    const removeBugStarred = (id) => {
+        CusSwal.deleteConfiramation(async () => {
+            setLoading(true);
+            Toaster.loadingToast('Removing Bug from starred.........')
+            try {
+                const result = await BugSevice.removeBugStarred(userEmail, id);
+                if (result.data.code === 200) {
+                    fetchAllBugs()
+                    Toaster.justToast('success', 'removed succesffully', () => {
+                    })
+                }
+            } catch (error) {
+                console.error(error);
+                alert(error)
+            } finally {
+                setLoading(false);
+                Toaster.dismissLoadingToast()
+            }
+        })
+    }
     useEffect(() => {
         fetchAllBugs()
     }, [])
@@ -46,7 +67,7 @@ export default function XStarred() {
                             <PreLoader />
                         ) : (
                             <>
-                                <StarredTable bugs={bugs} viewBug={viewBug}/>
+                                <StarredTable bugs={bugs} viewBug={viewBug} removeBugStarred={removeBugStarred} />
                                 <StarredRecord bug={bug} />
                             </>
                         )

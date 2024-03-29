@@ -4,7 +4,7 @@ import LocalStore from '../../../../Store/LocalStore';
 import BugSevice from '../../../../Services/Bug/BugSevice';
 import DateFormatter from '../../../../Utils/Constants/DateFormatter';
 
-export default function HistoryTable({ bugs, viewBug }) {
+export default function HistoryTable({ bugs, viewBug, removeBug,addBugToFavourite,addBugToStarred }) {
 
 
     return (
@@ -47,10 +47,19 @@ export default function HistoryTable({ bugs, viewBug }) {
                                                                     <div dangerouslySetInnerHTML={{ __html: bug.bug_res_html}}></div>
                                                                 </td> */}
                                                                 <td>{DateFormatter.formatDate(bug.created_at)}</td>
-                                                                <td className=''>
+                                                                <td className='d-flex justify-content-between align-items-center'>
+                                                                    <button onClick={() => {
+                                                                        removeBug(bug._id)
+                                                                    }} className='btn btn-danger rounded text-white p-2'>❌</button>
+                                                                    <button onClick={() => {
+                                                                        addBugToFavourite(bug._id)
+                                                                    }} className='btn btn-danger rounded text-white p-2 mx-1'>💘</button>
+                                                                    <button onClick={() => {
+                                                                        addBugToStarred(bug._id)
+                                                                    }} className='btn btn-warning rounded text-white p-2'>🌟</button>
                                                                     <button onClick={() => {
                                                                         viewBug(bug._id)
-                                                                    }} className='btn btn-dark rounded text-white p-2'>More</button>
+                                                                    }} className='btn btn-dark rounded text-white p-2 mx-1'>More</button>
                                                                 </td>
                                                             </tr>
                                                         )

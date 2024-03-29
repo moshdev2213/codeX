@@ -64,7 +64,7 @@ export default function Home() {
       const result = await BugSevice.generateBugReference(userEmail, id);
       if (result.data.code === 200) {
         setBugReference(result.data.data)
-        Toaster.justToast('success', 'bug in native language', () => {
+        Toaster.justToast('success', 'bug references fetched', () => {
         });
       }
     } catch (error) {

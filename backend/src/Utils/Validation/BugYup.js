@@ -50,6 +50,10 @@ class BugYup {
         email: yup.string().email().required(),
         id:yup.string().required()
     })
+    removeBug=yup.object({
+        email: yup.string().email().required(),
+        id:yup.string().required()
+    })
 
 }
 
