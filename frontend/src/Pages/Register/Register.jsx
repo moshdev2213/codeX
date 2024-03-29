@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate, Navigate } from 'react-router-dom'
-import logo from "../../../public/assets/images/logos/dark-logo.svg"
+import logo from "../../../public/assets/images/logos/logo.jpg"
 import { useFormik } from 'formik';
 import AuthYup from '../../Validation/Auth/AuthYup';
 import AuthService from '../../Services/Auth/AuthService';
@@ -93,10 +93,10 @@ export default function Register() {
                                                 {errors.password}
                                             </div>
                                         </div>
-                                        <button type='submit' disabled={loading} className="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
+                                        <button type='submit' disabled={loading} className="btn btn-dark w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
                                         <div className="d-flex align-items-center justify-content-center">
                                             <p className="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                                            <NavLink className="text-primary fw-bold ms-2" to={'/login'}>Sign In</NavLink>
+                                            <NavLink className="text-dark fw-bold ms-2" to={'/login'}>Sign In</NavLink>
                                         </div>
                                     </form>
                                 </div>
