@@ -7,7 +7,10 @@ export default function GettingStarted() {
                 <div className="row h-100">
                     <div className="col-12 rounded">
                         <div className="card p-3 shadow-sm mb-3">
-                            <h1 className='fw-bolder'>Getting Started</h1>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h1 className='fw-bolder'>Getting Started</h1>
+                                <h3>✨</h3>
+                            </div>
                             <p className='text-black fs-6'><span className='text-bg-dark fst-italic'>CODEX</span> is an advanced user-friendly code debugger tool which makes coding easier and takes it to the next level.</p>
                             <p className='text-black fs-5'>Follow these steps to continue:</p>
                             <ul className="list-group list-group-flush rounded">

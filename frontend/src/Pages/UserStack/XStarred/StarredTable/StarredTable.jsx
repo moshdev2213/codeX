@@ -1,50 +1,66 @@
 import React from 'react'
+import DateFormatter from '../../../../Utils/Constants/DateFormatter'
 
-export default function StarredTable() {
+export default function StarredTable({ bugs, viewBug }) {
     return (
-        <div className="me-4" style={{ flex: 1 }}>
-            <div className="card h-100 p-3 w-100 shadow-sm">
+        <div className="overflow-scroll overflow-x-hidden me-2" style={{ flex: 1 }}>
+            <div className=" h-100 w-100 shadow-sm">
                 <div className="row h-100">
                     <div className='col-12 rounded d-flex flex-column'>
-                        <div className="mb-3 flex-grow-1">
+                        <div className="card p-3 mb-3 flex-grow-1">
                             {/* header */}
-                            <div class="d-flex justify-content-start align-items-center" role="search">
-                                <h4 className='h1 fw-bolder'>Starred List</h4>
+                            <div class="d-flex flex-row justify-content-between align-items-center" role="search">
+                                <div className="div">
+                                    <h4 className='h1 fw-bolder'>Favorite Bugs</h4>
+                                    <p>showing the total bugs that user has favoured</p>
+                                </div>
+                                <div className="div">
+                                    <h1>🐞🌟</h1>
+                                </div>
                             </div>
                             {/* table */}
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Bug Req</th>
+                                        <th scope="col">Created</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                                    {
+                                        bugs !== null ? (
+                                            <>
+                                                {
+                                                    bugs.map((bug) => {
+                                                        return (
+                                                            <tr key={bug._id}>
+                                                                <td>
+                                                                    {bug.email}
+                                                                </td>
+                                                                {/* <td >
+                                                                    <div dangerouslySetInnerHTML={{ __html: bug.bug_res_html}}></div>
+                                                                </td> */}
+                                                                <td>{DateFormatter.formatDate(bug.created_at)}</td>
+                                                                <td className=''>
+                                                                    <button onClick={() => {
+                                                                        viewBug(bug._id)
+                                                                    }} className='btn btn-dark rounded text-white p-2'>More</button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+                                            </>
+                                        ) : (
+                                            <tr>
+                                                <td>Not Found</td>
+                                            </tr>
+                                        )
+                                    }
+
                                 </tbody>
                             </table>
-                            {/* end */}
-                            <div class="d-flex justify-content-between align-items-md-center px-6 py-3 flex-md-row flex-column gap-4">
-                                <span>Showing 23 entries</span>
-                            </div>
                         </div>
                     </div>
                 </div>
