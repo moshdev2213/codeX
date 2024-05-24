@@ -6,7 +6,7 @@ dotenv.config();
 import cors from "cors";
 import db from "./db.js"
 import corsConfig from "./Config/CorsConfig.js"
-
+import response from "./Utils/ResponseHandler/ResponseHandler.js";
 const PORT = process.env.PORT || 3500
 
 app.use(cors(corsConfig));
