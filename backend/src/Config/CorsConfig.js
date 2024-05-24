@@ -1,5 +1,5 @@
 const whiteList = [
-    "https://www.yoursite.com",
+    "https://code-x-seven-orpin.vercel.app",
     "http://localhost:5173",
     "http://localhost:3500",
     "http://localhost:3000",
