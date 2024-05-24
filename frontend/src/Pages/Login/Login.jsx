@@ -24,12 +24,11 @@ export default function Login() {
             try {
                 const result = await AuthService.authLogin(values)
                 if (result.data.code === 201) {
-                    const { token, email,role } = result.data.data;
+                    const { token, email, role } = result.data.data;
                     LocalStore.storeToken({ token, role, email });
                     Toaster.justToast('success', result.data.data.message, () => {
                         Toaster.dismissLoadingToast()
-                        if (role === "employee")
-                            navigate('/main/user/home')
+                        navigate('/main/user/home')
                     })
                 }
             } catch (error) {
